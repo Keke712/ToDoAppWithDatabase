@@ -47,7 +47,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public int delete(String task) {
         SQLiteDatabase db = this.getWritableDatabase();
-        long rawId = db.delete(TABLE_NAME, task, new String[]{});
+        String statement = "DELETE FROM "+TABLE_NAME+" WHERE task='"+task+"'";
+        db.execSQL(statement);
         return 1;
     }
 
@@ -59,7 +60,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         if (c != null) {
             if (c.moveToFirst()) {
                 do {
-                    String dir = c.getString(c.getColumd"nIndex(TASK_COL));
+                    String dir = c.getString(c.getColumnIndex(TASK_COL));
                     taskList.add(dir);
                 }while (c.moveToNext());
             }
